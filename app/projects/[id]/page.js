@@ -1,7 +1,7 @@
 import { readProject } from "@/app/data/data";
 
 export default async function ProjectPage({ params }) {
-    const { id } = params;
+    const { id } = await params;
 
     const project = await readProject(id);
 
