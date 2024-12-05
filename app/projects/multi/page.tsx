@@ -40,7 +40,7 @@ export default function Multi() {
   ];
 
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", gap: 6 }}>
       <Timeline
         provider={provider}
         events={events}

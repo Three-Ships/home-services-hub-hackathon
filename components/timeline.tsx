@@ -135,7 +135,7 @@ export default function Timeline({
         <VerticalTimelineElement
           key="add"
           className="vertical-timeline-element--add"
-          date={new Date().toISOString()}
+          date="now"
           contentStyle={{
             background: "rgb(33, 150, 243)",
             color: "#fff",
