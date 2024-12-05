@@ -1,5 +1,4 @@
 'use client'
-import { GetServerSideProps } from 'next';
 import { useEffect, useState } from 'react';
 import ProjectTile from '@/components/ProjectTile';
 import ButtonFloat from '@/components/ButtonFloat';
