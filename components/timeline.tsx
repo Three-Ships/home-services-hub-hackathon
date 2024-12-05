@@ -8,6 +8,13 @@ import {
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 
+import { TimeLineEvent, Provider } from "@/app/types";
+
+export interface TimelineProps {
+  provider: Provider;
+  events: TimeLineEvent[];
+}
+
 export default function Timeline() {
   return (
     <VerticalTimeline>
