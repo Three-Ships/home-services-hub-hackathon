@@ -51,7 +51,7 @@ const NewProjectForm = () => {
           value={category}
           onChange={(event) => setCategory(event.target.value as Category)}
         >
-          <option disabled selected>
+          <option disabled>
             Pick one
           </option>
           {Object.values(CATEGORIES).map((category) => (
