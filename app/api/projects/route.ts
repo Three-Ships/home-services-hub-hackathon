@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import { readProjects, writeProject, deleteProject, updateProject } from "@/app/data/data";
-
+import { CATEGORIES } from "@/app/types";
 
 export async function GET() {
   const projects = await readProjects();
@@ -33,7 +33,7 @@ export async function DELETE(req: Request) {
 
 export async function POST(req: Request) {
   const data = await req.json();
-  const { name, description } = data;
+  const { name, description, category } = data;
 
   console.log(req.body);
 
@@ -42,7 +42,9 @@ export async function POST(req: Request) {
     !name ||
     typeof name !== "string" ||
     !description ||
-    typeof description !== "string"
+    typeof description !== "string" ||
+    !category ||
+    CATEGORIES.indexOf(category) === -1
   ) {
     return NextResponse.json(
       { error: "Invalid input. Name and description are required and must be strings." },
@@ -55,6 +57,7 @@ export async function POST(req: Request) {
     id: String(randomUUID()),
     name,
     description,
+    category,
     createdAt: new Date(),
   };
 

@@ -1,6 +1,11 @@
+export const CATEGORIES = ["Roofing", "Siding", "Windows", "Gutters", "Painting", "Other"] as const;
+
+export type Category = typeof CATEGORIES[number];
+
 export default interface Project {
   id: string;
   name: string;
+  category: Category
   description: string;
   createdAt: Date;
   updatedAt?: Date;
