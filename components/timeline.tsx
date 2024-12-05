@@ -36,7 +36,7 @@ function ProviderComponent({
   return (
     <div style={{ border: "3px white solid", borderRadius: 8, padding: 20 }}>
       <h1>{provider.name}</h1>
-      <p style={{ fontFamily: "monospace", fontSize: 20 }}>{quoteText}</p>
+      <p style={{ fontFamily: "monospace", fontSize: 15 }}>{quoteText}</p>
     </div>
   );
 }
