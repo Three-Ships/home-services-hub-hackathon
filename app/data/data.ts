@@ -20,6 +20,16 @@ export const readProjects = async (): Promise<Project[]> => {
     }
 }
 
+export const readProject = async (id: string): Promise<Project|null> => {
+    try {
+        const projects = await readProjects()
+        return projects.find((project) => project.id === id) || null
+    } catch (error) {
+        console.error(error)
+        return null
+    }
+}
+
 export const updateProject = async (project: Project): Promise<Project|null> => {
     try {
         const projects = await readProjects()
