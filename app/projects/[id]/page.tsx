@@ -56,7 +56,7 @@ const DangerZone = ({ projectId }: { projectId: string }) => {
     }
 
     // redirect to projects page
-    router.push("/projects");
+    router.push("/");
   };
 
   return (
