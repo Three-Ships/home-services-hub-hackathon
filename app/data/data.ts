@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from "path"
 
-import Project from '../types/project'
+import Project from '../types/index'
 
 const DATA_FILE = path.resolve("app/data/database.json")
 
