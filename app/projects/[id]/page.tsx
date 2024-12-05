@@ -46,8 +46,12 @@ const DangerZone = ({ projectId }: { projectId: string }) => {
 
   const handleDelete = async () => {
     // send req to delete project
-    const res = await fetch(`/api/projects/${projectId}`, {
+    const res = await fetch(`/api/projects`, {
       method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: projectId }),
     });
 
     if (!res.ok) {
