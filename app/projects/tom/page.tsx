@@ -43,7 +43,7 @@ export default function JFDI() {
     <Timeline
       provider={provider}
       events={events}
-      compact={true}
+      compact={false}
       quote={quote}
     />
   );
