@@ -4,6 +4,22 @@ import ProjectTile from '@/components/ProjectTile';
 import ButtonFloat from '@/components/ButtonFloat';
 import Project from '@/app/types';
 
+const TEST_PROJECT_TOM = {
+  id: 'tom',
+  name: 'New Gutter Filters',
+  description: 'Add gutter filters on my house',
+  category: 'Gutters',
+  createdAt: new Date(),
+} as Project
+
+const TEST_PROJECT_MULTI = {
+  id: 'multi',
+  name: 'Replace Old Gutters',
+  description: 'Replace a broken section of gutters',
+  category: 'Gutters',
+  createdAt: new Date(),
+} as Project
+
 const Home = () => {
   const [projects, setProjects] = useState([]);
 
@@ -24,6 +40,8 @@ const Home = () => {
         {projects.map((project: Project) => (
           <ProjectTile key={project.id} project={project} />
         ))}
+        <ProjectTile project={TEST_PROJECT_TOM} />
+        <ProjectTile project={TEST_PROJECT_MULTI} />
         <ButtonFloat />
       </main>
     </div>
