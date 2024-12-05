@@ -61,6 +61,38 @@ export default function Multi() {
     } as EmailEvent,
   ];
 
+  const altEvents = [
+    {
+      date: new Date("2021-06-01T11:00:00Z"),
+      type: "email",
+      subject: "project proposal",
+      body: "attached is the project proposal",
+      contacts: ["bob"],
+    } as EmailEvent,
+    {
+      date: new Date("2021-06-02T11:10:00Z"),
+      type: "email",
+      subject: "project proposal",
+      body: "attached is the project proposal",
+      contacts: ["bob"],
+    } as EmailEvent,
+    {
+      date: new Date("2021-06-03T09:00:00Z"),
+      type: "phone-call",
+      phoneNumber: "555-1234",
+      direction: "outgoing",
+      notes: "discuss the project",
+      contacts: ["bob"],
+    } as PhoneCallEvent,
+    {
+      date: new Date("2021-06-04T10:00:00Z"),
+      type: "meeting",
+      location: "office",
+      notes: "discuss the project",
+      contacts: ["alice"],
+    } as MeetingEvent,
+  ];
+
   return (
     <div style={{ display: "flex", gap: 10 }}>
       <Timeline
@@ -77,7 +109,7 @@ export default function Multi() {
       />
       <Timeline
         provider={provider3}
-        events={events}
+        events={altEvents}
         compact={true}
         quote={quote3}
       />
