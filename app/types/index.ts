@@ -24,7 +24,6 @@ export interface Quote {
 
 export interface EventBase {
   date: Date;
-  type: string;
   notes?: string;
   duration?: number;
   contacts: string[];
