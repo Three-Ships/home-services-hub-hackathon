@@ -1,6 +1,6 @@
 "use client";
 
-import { FaPhone, FaEnvelope } from "react-icons/fa6";
+import { FaPhone, FaEnvelope, FaPlus } from "react-icons/fa6";
 import { FaUserFriends } from "react-icons/fa";
 
 import {
@@ -9,95 +9,149 @@ import {
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 
-import { TimeLineEvent, Provider } from "@/app/types";
+import { TimeLineEvent, Provider, Quote } from "@/app/types";
 
 export interface TimelineProps {
   provider: Provider;
   events: TimeLineEvent[];
+  compact: boolean;
+  quote?: Quote;
 }
 
-export default function Timeline({ provider, events }: TimelineProps) {
+function ProviderComponent({
+  provider,
+  quote,
+}: {
+  provider: Provider;
+  quote?: Quote;
+}) {
+  let quoteText = "No quote available";
+  if (quote) {
+    if (quote.range[0] === quote.range[1]) {
+      quoteText = `$${quote.range[0]}`;
+    } else {
+      quoteText = `$${quote.range[0]} - $${quote.range[1]}`;
+    }
+  }
   return (
-    <VerticalTimeline layout="1-column-left">
-      {events.map((event: TimeLineEvent) => {
-        // switch on the event type
-        switch (event.type) {
-          case "phone-call":
-            return (
-              <VerticalTimelineElement
-                key={event.date.toISOString()}
-                className="vertical-timeline-element--work"
-                date={event.date.toISOString()}
-                contentStyle={{
-                  background: "rgb(33, 150, 243)",
-                  color: "#fff",
-                }}
-                contentArrowStyle={{
-                  borderRight: "7px solid  rgb(33, 150, 243)",
-                }}
-                iconStyle={{ background: "rgb(33, 150, 243)", color: "#fff" }}
-                icon={<FaPhone />}
-              >
-                <h3 className="vertical-timeline-element-title">Phone Call</h3>
-                <h4 className="vertical-timeline-element-subtitle">
-                  {event.phoneNumber}
-                </h4>
-                <p>{event.notes}</p>
-              </VerticalTimelineElement>
-            );
-          case "meeting":
-            return (
-              <VerticalTimelineElement
-                key={event.date.toISOString()}
-                className="vertical-timeline-element--work"
-                date={event.date.toISOString()}
-                contentStyle={{
-                  background: "rgb(33, 150, 243)",
-                  color: "#fff",
-                }}
-                contentArrowStyle={{
-                  borderRight: "7px solid  rgb(33, 150, 243)",
-                }}
-                iconStyle={{ background: "rgb(33, 150, 243)", color: "#fff" }}
-                icon={<FaUserFriends />}
-              >
-                <h3 className="vertical-timeline-element-title">Meeting</h3>
-                <h4 className="vertical-timeline-element-subtitle">
-                  {event.location}
-                </h4>
-                <p>{event.notes}</p>
-              </VerticalTimelineElement>
-            );
-          case "email":
-            return (
-              <VerticalTimelineElement
-                key={event.date.toISOString()}
-                className="vertical-timeline-element--work"
-                date={event.date.toISOString()}
-                contentStyle={{
-                  background: "rgb(33, 150, 243)",
-                  color: "#fff",
-                }}
-                contentArrowStyle={{
-                  borderRight: "7px solid  rgb(33, 150, 243)",
-                }}
-                iconStyle={{ background: "rgb(33, 150, 243)", color: "#fff" }}
-                icon={<FaEnvelope />}
-              >
-                <h3 className="vertical-timeline-element-title">Email</h3>
-                <h4 className="vertical-timeline-element-subtitle">
-                  {event.subject}
-                </h4>
-                <p>{event.body}</p>
-              </VerticalTimelineElement>
-            );
-          default:
-            throw new Error(`Unknown event type: ${event}`);
-        }
-      })}
-    </VerticalTimeline>
+    <div style={{ border: "3px white solid", borderRadius: 8, padding: 20 }}>
+      <h1>{provider.name}</h1>
+      <p style={{ fontFamily: "monospace", fontSize: 20 }}>{quoteText}</p>
+    </div>
   );
 }
+
+export default function Timeline({
+  provider,
+  events,
+  compact,
+  quote,
+}: TimelineProps) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <ProviderComponent provider={provider} quote={quote} />
+      <VerticalTimeline layout="1-column-left" lineColor="white">
+        {events.map((event: TimeLineEvent) => {
+          // switch on the event type
+          switch (event.type) {
+            case "phone-call":
+              return (
+                <VerticalTimelineElement
+                  key={event.date.toISOString()}
+                  className="vertical-timeline-element--work"
+                  date={event.date.toISOString()}
+                  contentStyle={{
+                    background: "rgb(33, 150, 243)",
+                    color: "#fff",
+                    visibility: compact ? "hidden" : "visible",
+                  }}
+                  contentArrowStyle={{
+                    borderRight: "7px solid  rgb(33, 150, 243)",
+                  }}
+                  iconStyle={{ background: "rgb(33, 150, 243)", color: "#fff" }}
+                  icon={<FaPhone />}
+                >
+                  <h3 className="vertical-timeline-element-title">
+                    Phone Call
+                  </h3>
+                  <h4 className="vertical-timeline-element-subtitle">
+                    {event.phoneNumber}
+                  </h4>
+                  <p>{event.notes}</p>
+                </VerticalTimelineElement>
+              );
+            case "meeting":
+              return (
+                <VerticalTimelineElement
+                  key={event.date.toISOString()}
+                  className="vertical-timeline-element--work"
+                  date={event.date.toISOString()}
+                  contentStyle={{
+                    background: "rgb(33, 150, 243)",
+                    color: "#fff",
+                    visibility: compact ? "hidden" : "visible",
+                  }}
+                  contentArrowStyle={{
+                    borderRight: "7px solid  rgb(33, 150, 243)",
+                  }}
+                  iconStyle={{ background: "rgb(33, 150, 243)", color: "#fff" }}
+                  icon={<FaUserFriends />}
+                >
+                  <h3 className="vertical-timeline-element-title">Meeting</h3>
+                  <h4 className="vertical-timeline-element-subtitle">
+                    {event.location}
+                  </h4>
+                  <p>{event.notes}</p>
+                </VerticalTimelineElement>
+              );
+            case "email":
+              return (
+                <VerticalTimelineElement
+                  key={event.date.toISOString()}
+                  className="vertical-timeline-element--work"
+                  date={event.date.toISOString()}
+                  contentStyle={{
+                    background: "rgb(33, 150, 243)",
+                    color: "#fff",
+                    visibility: compact ? "hidden" : "visible",
+                  }}
+                  contentArrowStyle={{
+                    borderRight: "7px solid  rgb(33, 150, 243)",
+                  }}
+                  iconStyle={{ background: "rgb(33, 150, 243)", color: "#fff" }}
+                  icon={<FaEnvelope />}
+                >
+                  <h3 className="vertical-timeline-element-title">Email</h3>
+                  <h4 className="vertical-timeline-element-subtitle">
+                    {event.subject}
+                  </h4>
+                  <p>{event.body}</p>
+                </VerticalTimelineElement>
+              );
+            default:
+              throw new Error(`Unknown event type: ${event}`);
+          }
+        })}
+        <VerticalTimelineElement
+          key="add"
+          className="vertical-timeline-element--add"
+          date={new Date().toISOString()}
+          contentStyle={{
+            background: "rgb(33, 150, 243)",
+            color: "#fff",
+            display: "none",
+            visibility: "hidden",
+          }}
+          iconStyle={{ background: "black", color: "#fff" }}
+          icon={<FaPlus />}
+        >
+          <h3 className="vertical-timeline-element-title">Add event</h3>
+        </VerticalTimelineElement>
+      </VerticalTimeline>
+    </div>
+  );
+}
+
 //   return (
 //     <VerticalTimeline>
 //       <VerticalTimelineElement

@@ -1,13 +1,18 @@
 import Timeline from "@/components/timeline";
-import { EmailEvent, MeetingEvent, PhoneCallEvent } from "../types";
+import { EmailEvent, MeetingEvent, PhoneCallEvent, Quote } from "../types";
 // import Image from "next/image";
 
 export default function JFDI() {
   const provider = {
-    name: "JFDI",
+    name: "BOBS Gutters",
     url: "https://jfdi.com",
     contacts: ["bob", "alice"],
   };
+
+  const quote = {
+    range: [1000, 2000],
+    scope: "gutters",
+  } as Quote;
 
   const events = [
     {
@@ -34,5 +39,12 @@ export default function JFDI() {
     } as EmailEvent,
   ];
 
-  return <Timeline provider={provider} events={events} />;
+  return (
+    <Timeline
+      provider={provider}
+      events={events}
+      compact={true}
+      quote={quote}
+    />
+  );
 }
