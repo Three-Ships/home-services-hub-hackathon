@@ -30,7 +30,6 @@ const NewProjectForm = () => {
     });
     if (response.ok) {
       const project = await response.json();
-      alert("Project created successfully!");
       setName("");
       setDescription("");
       setCategory("Roofing");
