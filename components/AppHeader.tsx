@@ -5,7 +5,7 @@ export default function AppHeader() {
     <header className="sticky top-0 z-10 bg-black shadow-md">
       <div className="navbar bg-base-100">
         <div className="flex-1">
-          <a className="btn btn-ghost text-xl">Cubby</a>
+          <a href="/" className="btn btn-ghost text-xl">Cubby</a>
         </div>
         <div className="flex-none gap-2">
           <div className="form-control">
