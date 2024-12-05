@@ -1,4 +1,6 @@
-const ProjectTile = ({ project }) => {
+import Project from '@/app/types';
+
+const ProjectTile = ({project} : {project : Project}) => {
     return (
       <div className="card bg-gray-900 shadow-md p-1 rounded-md">
         <a href={`/projects/${project.id}`}>
