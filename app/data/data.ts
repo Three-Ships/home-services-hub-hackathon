@@ -20,6 +20,22 @@ export const readProjects = async (): Promise<Project[]> => {
     }
 }
 
+export const updateProject = async (project: Project): Promise<Project|null> => {
+    try {
+        const projects = await readProjects()
+        const index = projects.findIndex((p) => p.id === project.id)
+        if (index === -1) {
+            return null
+        }
+        projects[index] = project
+        fs.writeFileSync(DATA_FILE, JSON.stringify(projects, null, 2))
+        return project
+    } catch (error) {
+        console.error(error)
+        return null
+    }
+}
+
 export const writeProject = async (project: Project): Promise<Project|null> => {
     try {
         const projects = await readProjects()
