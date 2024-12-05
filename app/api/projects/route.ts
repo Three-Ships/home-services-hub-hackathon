@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { randomUUID } from "crypto";
-import { readProjects, writeProject, deleteProject } from "@/app/data/data";
+import { readProjects, writeProject, deleteProject, updateProject } from "@/app/data/data";
 
 
 export async function GET() {
@@ -67,4 +67,42 @@ export async function POST(req: Request) {
     );
   }
   return NextResponse.json(newProject, { status: 201 });
+}
+
+export async function PUT(req: Request) {
+  const data = await req.json();
+  const { id, name, description } = data;
+
+  // Validate the input
+  if (
+    !id ||
+    typeof id !== "string" ||
+    !name ||
+    typeof name !== "string" ||
+    !description ||
+    typeof description !== "string"
+  ) {
+    return NextResponse.json(
+      { error: "Invalid input. ID, name, and description are required and must be strings." },
+      { status: 400 }
+    );
+  }
+
+  // Update the project
+  const updatedProject = {
+    id,
+    name,
+    description,
+    updatedAt: new Date(),
+  };
+
+  // Save the project
+  const updateResult = await updateProject({ ...data, ...updatedProject});
+  if (!updateResult) {
+    return NextResponse.json(
+      { error: "Failed to update the project." },
+      { status: 500 }
+    );
+  }
+  return NextResponse.json(updatedProject, { status: 200 });  
 }
