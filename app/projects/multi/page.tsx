@@ -1,5 +1,5 @@
 import Timeline from "@/components/timeline";
-import { EmailEvent, MeetingEvent, PhoneCallEvent, Quote } from "../types";
+import { EmailEvent, MeetingEvent, PhoneCallEvent, Quote } from "../../types";
 // import Image from "next/image";
 
 export default function Multi() {
