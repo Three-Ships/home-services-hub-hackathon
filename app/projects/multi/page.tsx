@@ -9,8 +9,30 @@ export default function Multi() {
     contacts: ["bob", "alice"],
   };
 
+  const provider2 = {
+    name: "Gutter Emporium",
+    url: "https://jfdi.com",
+    contacts: ["bob", "alice"],
+  };
+
+  const provider3 = {
+    name: "Gutter World",
+    url: "https://jfdi.com",
+    contacts: ["bob", "alice"],
+  };
+
   const quote = {
     range: [1000, 2000],
+    scope: "gutters",
+  } as Quote;
+
+  // const quote2 = {
+  //   range: [2000, 3000],
+  //   scope: "gutters",
+  // } as Quote;
+
+  const quote3 = {
+    range: [2500, 2500],
     scope: "gutters",
   } as Quote;
 
@@ -40,7 +62,7 @@ export default function Multi() {
   ];
 
   return (
-    <div style={{ display: "flex", gap: 6 }}>
+    <div style={{ display: "flex", gap: 10 }}>
       <Timeline
         provider={provider}
         events={events}
@@ -48,16 +70,16 @@ export default function Multi() {
         quote={quote}
       />
       <Timeline
-        provider={provider}
+        provider={provider2}
         events={events}
         compact={true}
-        quote={quote}
+        // quote={quote}
       />
       <Timeline
-        provider={provider}
+        provider={provider3}
         events={events}
         compact={true}
-        quote={quote}
+        quote={quote3}
       />
     </div>
   );
